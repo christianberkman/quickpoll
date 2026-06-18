@@ -281,6 +281,9 @@ function getAudioContext() {
   return audioCtx;
 }
 
+const beepFreqs = [2000, 3000];
+let beepIndex = 0;
+
 function beep() {
   const ctx = getAudioContext();
   const oscillator = ctx.createOscillator();
@@ -288,10 +291,14 @@ function beep() {
 
   oscillator.connect(gainNode);
   gainNode.connect(ctx.destination);
+  
   oscillator.type = "square";
-  oscillator.frequency.value = 2000;
+  oscillator.frequency.value = beepFreqs[beepIndex];
+  beepIndex = (beepIndex + 1) % beepFreqs.length; 
+
   gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
   gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+  
   oscillator.start();
   oscillator.stop(ctx.currentTime + 0.2);
 }
