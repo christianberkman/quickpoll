@@ -11,6 +11,8 @@
         html,
         body {
             height: 100%;
+            max-width: 720px;
+            margin: auto;
         }
 
         body {
@@ -60,7 +62,7 @@
 
     <main class="container mt-3 d-flex flex-column" style="flex: 1 1 auto; min-height: 0;">
         <div class="row mb-4 sticky-top bg-dark px-1">
-            <h2 class="display-2" id="questionHeading">Question</h2>
+            <h2 class="display-2 mb-0" id="questionHeading">Question</h2>
         </div>
 
         <div id="buttonsContainer" class="d-flex flex-column px-1"></div>
@@ -72,7 +74,7 @@
     <template id="buttonTemplate">
         <button class="btn bt btn-primary mb-2 qp-button d-flex align-items-center" data-index="" data-count="">
         <span class="qp-label fs-2 flex-grow-1 text-center text-truncate"></span>
-        <span class="badge text-bg-light qp-count"></span>
+        <span class="badge fs-6 text-bg-light qp-count"></span>
 </button>
     </template>
     <script src="quickpoll.js"></script>
