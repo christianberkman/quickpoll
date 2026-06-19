@@ -187,7 +187,7 @@ if (optionsContainer) {
 }
 
 /**
- * Buttons
+ * Poll Buttons
  */
 const buttonsContainer = document.getElementById("buttonsContainer");
 if (buttonsContainer) {
