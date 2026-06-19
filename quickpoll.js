@@ -1,4 +1,16 @@
 /**
+ * Declarations
+ */
+const buttonClasses = [
+  "btn-primary",
+  "btn-success",
+  "btn-danger",
+  "btn-warning",
+  "btn-info",
+  "btn-secondary",
+];
+
+/**
  * Storage
  */
 function updateOptionsFromInputs() {
@@ -10,6 +22,8 @@ function updateOptionsFromInputs() {
     let option = {};
     option.label = optionInput.querySelector(".qp-option-label").value;
     option.count = optionInput.querySelector(".qp-option-count").value;
+    option.buttonClass =
+      optionInput.querySelector(".qp-button-class").dataset.buttonClass;
 
     if (option.label.trim() !== "") options.push(option);
   });
@@ -131,6 +145,16 @@ if (optionsContainer) {
       if (option.label.trim() !== "")
         clone.querySelector(".qp-option-label").value = option.label;
       clone.querySelector(".qp-option-count").value = option.count;
+
+      clone.querySelector(".qp-button-class").dataset.buttonClass =
+        option.buttonClass ?? buttonClasses[0];
+      clone
+        .querySelector(".qp-button-class")
+        .classList.add(option.buttonClass ?? buttonClasses[0]);
+    } else {
+      clone.querySelector(".qp-button-class").dataset.buttonClass =
+        buttonClasses[0];
+      clone.querySelector(".qp-button-class").classList.add(buttonClasses[0]);
     }
 
     optionsContainer.appendChild(clone);
@@ -166,6 +190,21 @@ if (optionsContainer) {
     if (e.target !== last && e.target.value.trim() === "") {
       e.target.closest(".input-group").remove();
     }
+
+    updateOptionsFromInputs();
+  });
+
+  // Button Class
+  optionsContainer.addEventListener("click", function (e) {
+    const toggleButton = e.target.closest(".qp-button-class");
+    if (!toggleButton) return;
+
+    const currentClass = toggleButton.dataset.buttonClass;
+    const newClass = nextButtonClass(currentClass);
+
+    toggleButton.classList.remove(currentClass);
+    toggleButton.classList.add(newClass);
+    toggleButton.dataset.buttonClass = newClass;
 
     updateOptionsFromInputs();
   });
@@ -209,6 +248,7 @@ if (buttonsContainer) {
     if (!showCounterSetting)
       clone.querySelector(".qp-count").classList.add("d-none");
 
+    clone.querySelector(".qp-button").classList.add(option.buttonClass);
     clone.querySelector(".qp-button").dataset.index = index;
     clone.querySelector(".qp-button").dataset.count = option.count;
 
@@ -326,8 +366,10 @@ if (resultsContainer) {
     });
 }
 
-document.querySelector(".qp-total-count").textContent =
-  "Total count: " + getTotal();
+const totalCount = document.querySelector(".qp-total-count");
+if (totalCount) {
+  totalCount.textContent = "Total count: " + getTotal();
+}
 
 /**
  * Settings
@@ -363,6 +405,13 @@ if (vibrateSwitch) {
  * Other
  */
 
+function nextButtonClass(className) {
+  const currentIndex = buttonClasses.indexOf(className);
+  const nextIndex = (currentIndex + 1) % buttonClasses.length;
+  return buttonClasses[nextIndex];
+}
+
+// Beep
 let audioCtx = null;
 
 function getAudioContext() {
