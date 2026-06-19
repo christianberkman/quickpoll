@@ -10,6 +10,8 @@ const buttonClasses = [
   "btn-secondary",
 ];
 
+const storageKeys = ["question", "options", "showCounter", "beep", "vibrate"];
+
 /**
  * Storage
  */
@@ -94,6 +96,12 @@ function getTotal() {
   });
 
   return total;
+}
+
+function emptyStorage() {
+  storageKeys.forEach((key) => {
+    localStorage.removeItem(key);
+  });
 }
 
 /**
@@ -398,6 +406,20 @@ if (vibrateSwitch) {
 
   vibrateSwitch.addEventListener("change", function (e) {
     setVibrate(vibrateSwitch.checked);
+  });
+}
+
+const resetButton = document.getElementById("resetButton");
+if (resetButton) {
+  resetButton.addEventListener("click", function (e) {
+    const areYouSure = window.confirm(
+      "Are you sure you want to reset everything? Options and results will be lost. This cannot be undone.",
+    );
+
+    if (!areYouSure) return;
+
+    emptyStorage();
+    window.location.href = "index.html";
   });
 }
 
