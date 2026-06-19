@@ -33,7 +33,7 @@
           data-bs-toggle="collapse"
           data-bs-target="#collapseNav"
         >
-          <span><i class="bi bi-gear-fill"></i> Settings</span>
+          <span><i class="bi bi-clipboard-data-fill"></i> Results</span>
           <i class="bi bi-chevron-expand"></i>
         </button>
 
@@ -44,10 +44,13 @@
           <a href="buttons.html" class="list-group-item list-group-item-action">
             <i class="bi bi-gear-fill"></i> Poll
           </a>
-          <a href="results.html" class="list-group-item list-group-item-action">
+          <a href="#" class="list-group-item list-group-item-action active">
             <i class="bi bi-clipboard-data-fill"></i> Results
           </a>
-          <a href="#" class="list-group-item list-group-item-action active">
+          <a
+            href="settings.html"
+            class="list-group-item list-group-item-action"
+          >
             <i class="bi bi-gear-fill"></i> Settings
           </a>
         </div>
@@ -56,49 +59,33 @@
 
     <main class="container mt-3">
       <div class="row mb-4 px-1">
-        <h2>Settings</h2>
-        <div>
-          <div class="form-check form-switch mb-1">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="showCounterSwitch"
-              value="1"
-            />
-            <label class="form-check-label" for="showCounterSwitch"
-              >Show counter on buttons</label
-            >
-          </div>
+        <h2 class="display-2 mb-0" id="questionHeading">Question</h2>
+        <p class="text-secondary qp-total-count"></p>
 
-          <div class="form-check form-switch mb-1">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="beepSwitch"
-              value="1"
-            />
-            <label class="form-check-label" for="beepSwitch"
-              >Beep on button press</label
-            >
-          </div>
-
-          <div class="form-check form-switch mb-1">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="vibrateSwitch"
-              value="1"
-            />
-            <label class="form-check-label" for="vibrateSwitch"
-              >Vibrate on button press</label
-            >
-          </div>
+        <div class="text-secondary text-center mb-2">
+          <a href="#" class="text-reset" id="sortByLabelLink">Sort A-Z</a>
+          <i class="bi bi-dot"></i>
+          <a href="#" class="text-reset" id="sortByCountLink">Sort High-Low</a>
+          <i class="bi bi-dot"></i>
+          <a href="#" class="text-reset" id="copyResultsLink"
+            >Copy to clipboard</a
+          >
         </div>
+
+        <div id="resultsContainer" class="list-group px-2 mb-3"></div>
       </div>
     </main>
+
+    <template id="resultTemplate">
+      <div
+        class="list-group-item d-flex align-items-center justify-content-between qp-result"
+        data-label=""
+        data-count=""
+      >
+        <span class="fs-4 qp-label text-truncate"></span>
+        <span class="badge text-bg-light fs-6 qp-count"></span>
+      </div>
+    </template>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

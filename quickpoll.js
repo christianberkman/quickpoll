@@ -1,9 +1,7 @@
 /**
  * Storage
  */
-function updateOptionsFromInput() {
-  console.log("updateOptionsFromInput triggered");
-
+function updateOptionsFromInputs() {
   let options = [];
 
   const optionInputs = optionsContainer.querySelectorAll(".qp-option-input");
@@ -75,6 +73,15 @@ function getVibrate() {
   return false;
 }
 
+function getTotal() {
+  let total = 0;
+  getOptions().forEach((option) => {
+    total += Number(option.count);
+  });
+
+  return total;
+}
+
 /**
  * Question
  */
@@ -93,6 +100,7 @@ if (questionInput) {
   });
 }
 
+// Render Question heading
 const questionHeading = document.getElementById("questionHeading");
 
 if (questionHeading) {
@@ -144,7 +152,7 @@ if (optionsContainer) {
     // Update storage
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function () {
-      updateOptionsFromInput();
+      updateOptionsFromInputs();
     }, 300);
   });
 
@@ -159,7 +167,7 @@ if (optionsContainer) {
       e.target.closest(".input-group").remove();
     }
 
-    updateOptionsFromInput();
+    updateOptionsFromInputs();
   });
 
   // Delete input
@@ -174,7 +182,7 @@ if (optionsContainer) {
 
     if (toDelete === last) appendOptionInput();
 
-    updateOptionsFromInput();
+    updateOptionsFromInputs();
   });
 }
 
@@ -189,13 +197,13 @@ if (buttonsContainer) {
   const showCounterSetting = getshowCounter();
   const vibrateSetting = getVibrate();
 
+  // Render buttons
   options.forEach((option, index) => {
     const clone = buttonTemplate.content.cloneNode(true);
 
     console.log(option);
 
     clone.querySelector(".qp-label").textContent = option.label;
-
     clone.querySelector(".qp-count").textContent = option.count;
 
     if (!showCounterSetting)
@@ -207,6 +215,7 @@ if (buttonsContainer) {
     buttonsContainer.appendChild(clone);
   });
 
+  // Button click
   buttonsContainer.addEventListener("click", function (e) {
     const button = e.target.closest(".qp-button");
     if (!button) return false;
@@ -217,7 +226,6 @@ if (buttonsContainer) {
       if ("vibrate" in navigator) navigator.vibrate(50);
     }
 
-    // Count up
     let count = Number(button.dataset.count);
     const index = Number(button.dataset.index);
 
@@ -232,6 +240,94 @@ if (buttonsContainer) {
     localStorage.setItem("options", JSON.stringify(options));
   });
 }
+
+/**
+ * Results
+ */
+const resultsContainer = document.getElementById("resultsContainer");
+if (resultsContainer) {
+  const options = getOptions();
+  const total = getTotal();
+  const resultTemplate = document.getElementById("resultTemplate");
+
+  // Render results
+  options.forEach((option, index) => {
+    const clone = resultTemplate.content.cloneNode(true);
+
+    clone.querySelector(".qp-result").dataset.label = option.label;
+    clone.querySelector(".qp-result").dataset.count = option.count;
+    clone.querySelector(".qp-label").textContent = option.label;
+    clone.querySelector(".qp-count").textContent = option.count;
+
+    resultsContainer.appendChild(clone);
+  });
+
+  // Sort by label (A-Z)
+  document
+    .getElementById("sortByLabelLink")
+    .addEventListener("click", function (e) {
+      const resultDivs = Array.from(
+        resultsContainer.querySelectorAll(".qp-result"),
+      );
+
+      resultDivs.sort((a, b) => {
+        let valA, valB;
+
+        valA = (a.dataset.label || "").toLowerCase();
+        valB = (b.dataset.label || "").toLowerCase();
+
+        if (valA < valB) return -1;
+        if (valA > valB) return 1;
+        return 0;
+      });
+
+      resultDivs.forEach((div) => resultsContainer.appendChild(div));
+    });
+
+  // Sort by count (0-9)
+  document
+    .getElementById("sortByCountLink")
+    .addEventListener("click", function (e) {
+      const resultDivs = Array.from(
+        resultsContainer.querySelectorAll(".qp-result"),
+      );
+
+      resultDivs.sort((a, b) => {
+        let valA, valB;
+
+        valA = Number(a.dataset.count) || 0;
+        valB = Number(b.dataset.count) || 0;
+        if (valA < valB) return 1;
+        if (valA > valB) return -1;
+        return 0;
+      });
+
+      resultDivs.forEach((div) => resultsContainer.appendChild(div));
+    });
+
+  // Copy results to clipboard
+  document
+    .getElementById("copyResultsLink")
+    .addEventListener("click", function (e) {
+      let text = getQuestion() + "\n";
+
+      resultDivs = resultsContainer.querySelectorAll(".qp-result");
+
+      resultDivs.forEach((div) => {
+        text += `${div.dataset.label}: ${div.dataset.count}\n`;
+      });
+
+      text += `Total answers: ${total}\n`;
+
+      navigator.clipboard
+        .writeText(text)
+        .then(() => console.log("Copied!"))
+        .catch((err) => console.error("Failed to copy:", err));
+    });
+}
+
+document.querySelector(".qp-total-count").textContent =
+  "Total count: " + getTotal();
 
 /**
  * Settings
@@ -291,14 +387,14 @@ function beep() {
 
   oscillator.connect(gainNode);
   gainNode.connect(ctx.destination);
-  
+
   oscillator.type = "square";
   oscillator.frequency.value = beepFreqs[beepIndex];
-  beepIndex = (beepIndex + 1) % beepFreqs.length; 
+  beepIndex = (beepIndex + 1) % beepFreqs.length;
 
   gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
   gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-  
+
   oscillator.start();
   oscillator.stop(ctx.currentTime + 0.2);
 }
