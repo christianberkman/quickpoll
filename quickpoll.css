@@ -1,0 +1,28 @@
+* {
+  touch-action: pan-y;
+}
+
+html,
+body {
+  height: 100%;
+  max-width: 720px;
+  margin: auto;
+
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#buttonsContainer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.qp-button {
+  flex: 1 1 0;
+  min-height: 64px;
+}
