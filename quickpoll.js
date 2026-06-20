@@ -402,6 +402,10 @@ if (showCounterSwitch) {
 
 const vibrateSwitch = document.getElementById("vibrateSwitch");
 if (vibrateSwitch) {
+  if (!("vibrate" in navigator)) {
+    document.getElementById("vibrateSwitchContainer").remove();
+  }
+
   vibrateSwitch.checked = getVibrate();
 
   vibrateSwitch.addEventListener("change", function (e) {
