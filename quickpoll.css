@@ -1,8 +1,13 @@
+* {
+  touch-action: pan-y;
+}
+
 html,
 body {
   height: 100%;
   max-width: 720px;
   margin: auto;
+
 }
 
 body {
