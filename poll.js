@@ -87,3 +87,42 @@ if (getWakeLock()) {
     }
   });
 }
+
+/**
+ * Beep
+ */
+let audioCtx = null;
+
+function getAudioContext() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Chrome can suspend the context (e.g. after inactivity or before user gesture)
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+
+  return audioCtx;
+}
+
+const beepFreqs = [2000, 3000];
+let beepIndex = 0;
+
+function beep() {
+  const ctx = getAudioContext();
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(ctx.destination);
+
+  oscillator.type = "square";
+  oscillator.frequency.value = beepFreqs[beepIndex];
+  beepIndex = (beepIndex + 1) % beepFreqs.length;
+
+  gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+
+  oscillator.start();
+  oscillator.stop(ctx.currentTime + 0.2);
+}
