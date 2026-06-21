@@ -131,63 +131,6 @@ if (totalCount) {
 }
 
 /**
- * Settings
- */
-const beepSwitch = document.getElementById("beepSwitch");
-if (beepSwitch) {
-  beepSwitch.checked = getBeep();
-
-  beepSwitch.addEventListener("change", function (e) {
-    setBeep(beepSwitch.checked);
-  });
-}
-
-const showCounterSwitch = document.getElementById("showCounterSwitch");
-if (showCounterSwitch) {
-  showCounterSwitch.checked = getshowCounter();
-
-  showCounterSwitch.addEventListener("change", function (e) {
-    setshowCounter(showCounterSwitch.checked);
-  });
-}
-
-const wakeLockSwitch = document.getElementById("wakeLockSwitch");
-if (wakeLockSwitch) {
-  wakeLockSwitch.checked = getWakeLock();
-
-  wakeLockSwitch.addEventListener("change", function (e) {
-    setWakeLock(wakeLockSwitch.checked);
-  });
-}
-
-const vibrateSwitch = document.getElementById("vibrateSwitch");
-if (vibrateSwitch) {
-  if (!("vibrate" in navigator)) {
-    document.getElementById("vibrateSwitchContainer").remove();
-  }
-
-  vibrateSwitch.checked = getVibrate();
-
-  vibrateSwitch.addEventListener("change", function (e) {
-    setVibrate(vibrateSwitch.checked);
-  });
-}
-
-const resetButton = document.getElementById("resetButton");
-if (resetButton) {
-  resetButton.addEventListener("click", function (e) {
-    const areYouSure = window.confirm(
-      "Are you sure you want to reset everything? Options and results will be lost. This cannot be undone.",
-    );
-
-    if (!areYouSure) return;
-
-    emptyStorage();
-    window.location.href = "index.html";
-  });
-}
-
-/**
  * Other
  */
 
