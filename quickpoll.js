@@ -76,6 +76,19 @@ function getshowCounter() {
   else return false;
 }
 
+function setWakeLock(set) {
+  if (set) localStorage.setItem("wakeLock", "true");
+  else localStorage.setItem("wakeLock", "false");
+}
+
+function getWakeLock() {
+  const wakeLockSetting = localStorage.getItem("wakeLock");
+
+  // default false
+  if (wakeLockSetting === null || wakeLockSetting !== "true") return false;
+  else return true;
+}
+
 function setVibrate(set) {
   if (set) localStorage.setItem("vibrate", "true");
   else localStorage.setItem("vibrate", "false");
@@ -234,7 +247,7 @@ if (optionsContainer) {
 }
 
 /**
- * Poll Buttons
+ * Poll Screen
  */
 const buttonsContainer = document.getElementById("buttonsContainer");
 if (buttonsContainer) {
@@ -287,6 +300,42 @@ if (buttonsContainer) {
 
     localStorage.setItem("options", JSON.stringify(options));
   });
+
+  // Wake Lock
+  if (getWakeLock()) {
+    let wakeLock = null;
+
+    async function requestWakeLock() {
+      if (!("wakeLock" in navigator)) {
+        return false;
+      }
+
+      try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        return true;
+      } catch (err) {
+        console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+        return false;
+      }
+    }
+
+    async function releaseWakeLock() {
+      if (wakeLock) {
+        await wakeLock.release();
+        wakeLock = null;
+      }
+    }
+
+    requestWakeLock();
+
+    document.addEventListener("visibilitychange", async () => {
+      if (wakeLock !== null && document.visibilityState === "visible") {
+        if (getWakeLock()) {
+          await requestWakeLock();
+        }
+      }
+    });
+  }
 }
 
 /**
@@ -397,6 +446,15 @@ if (showCounterSwitch) {
 
   showCounterSwitch.addEventListener("change", function (e) {
     setshowCounter(showCounterSwitch.checked);
+  });
+}
+
+const wakeLockSwitch = document.getElementById("wakeLockSwitch");
+if (wakeLockSwitch) {
+  wakeLockSwitch.checked = getWakeLock();
+
+  wakeLockSwitch.addEventListener("change", function (e) {
+    setWakeLock(wakeLockSwitch.checked);
   });
 }
 
