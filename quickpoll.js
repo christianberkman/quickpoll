@@ -303,22 +303,15 @@ if (buttonsContainer) {
 
   // Wake Lock
   if (getWakeLock()) {
-    let wakeLockSentinel = null;
+    let wakeLock = null;
 
     async function requestWakeLock() {
       if (!("wakeLock" in navigator)) {
-        console.warn("Wake Lock API not supported in this browser");
         return false;
       }
 
       try {
-        wakeLockSentinel = await navigator.wakeLock.request("screen");
-        console.log("Wake Lock requested");
-
-        wakeLockSentinel.addEventListener("release", () => {
-          console.log("Wake lock released");
-        });
-
+        wakeLock = await navigator.wakeLock.request("screen");
         return true;
       } catch (err) {
         console.error(`Wake Lock error: ${err.name}, ${err.message}`);
@@ -327,16 +320,16 @@ if (buttonsContainer) {
     }
 
     async function releaseWakeLock() {
-      if (wakeLockSentinel) {
-        await wakeLockSentinel.release();
-        wakeLockSentinel = null;
+      if (wakeLock) {
+        await wakeLock.release();
+        wakeLock = null;
       }
     }
 
     requestWakeLock();
 
     document.addEventListener("visibilitychange", async () => {
-      if (wakeLockSentinel !== null && document.visibilityState === "visible") {
+      if (wakeLock !== null && document.visibilityState === "visible") {
         if (getWakeLock()) {
           await requestWakeLock();
         }
