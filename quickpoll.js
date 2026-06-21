@@ -120,10 +120,9 @@ function emptyStorage() {
 /**
  * Rendering
  */
-const questionHeading = document.getElementById("questionHeading");
-if (questionHeading) {
-  const question = getQuestion();
-  questionHeading.textContent = question;
+const questionText = document.querySelector(".qp-question-text");
+if (questionText) {
+  questionText.textContent = getQuestion();
 }
 
 /**
