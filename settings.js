@@ -2,30 +2,30 @@
  * Beep
  */
 const beepSwitch = document.getElementById("beepSwitch");
-beepSwitch.checked = getBeep();
+beepSwitch.checked = getBeepSetting();
 
 beepSwitch.addEventListener("change", function (e) {
-  setBeep(beepSwitch.checked);
+  setBeepSetting(beepSwitch.checked);
 });
 
 /**
  * Show Counter
  */
 const showCounterSwitch = document.getElementById("showCounterSwitch");
-showCounterSwitch.checked = getshowCounter();
+showCounterSwitch.checked = sgtShowCounterSetting();
 
 showCounterSwitch.addEventListener("change", function (e) {
-  setshowCounter(showCounterSwitch.checked);
+  setShowCounterSetting(showCounterSwitch.checked);
 });
 
 /**
  * Wake Lock
  */
 const wakeLockSwitch = document.getElementById("wakeLockSwitch");
-wakeLockSwitch.checked = getWakeLock();
+wakeLockSwitch.checked = getWakeLockSetting();
 
 wakeLockSwitch.addEventListener("change", function (e) {
-  setWakeLock(wakeLockSwitch.checked);
+  setWakeLockSetting(wakeLockSwitch.checked);
 });
 
 /**
@@ -36,10 +36,10 @@ if (!("vibrate" in navigator)) {
   document.getElementById("vibrateSwitchContainer").remove();
 }
 
-vibrateSwitch.checked = getVibrate();
+vibrateSwitch.checked = getVibrateSetting();
 
 vibrateSwitch.addEventListener("change", function (e) {
-  setVibrate(vibrateSwitch.checked);
+  setVibrateSetting(vibrateSwitch.checked);
 });
 
 /**

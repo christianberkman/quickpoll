@@ -50,12 +50,12 @@ function getQuestion() {
   return question;
 }
 
-function setBeep(set) {
+function setBeepSetting(set) {
   if (set) localStorage.setItem("beep", "true");
   else localStorage.setItem("beep", "false");
 }
 
-function getBeep() {
+function getBeepSetting() {
   const beep = localStorage.getItem("beep");
 
   // default false
@@ -63,12 +63,12 @@ function getBeep() {
   else return true;
 }
 
-function setshowCounter(set) {
+function setShowCounterSetting(set) {
   if (set) localStorage.setItem("showCounter", "true");
   else localStorage.setItem("showCounter", "false");
 }
 
-function getshowCounter() {
+function sgtShowCounterSetting() {
   const showCounter = localStorage.getItem("showCounter");
 
   // default true
@@ -76,12 +76,12 @@ function getshowCounter() {
   else return false;
 }
 
-function setWakeLock(set) {
+function setWakeLockSetting(set) {
   if (set) localStorage.setItem("wakeLock", "true");
   else localStorage.setItem("wakeLock", "false");
 }
 
-function getWakeLock() {
+function getWakeLockSetting() {
   const wakeLockSetting = localStorage.getItem("wakeLock");
 
   // default false
@@ -89,12 +89,12 @@ function getWakeLock() {
   else return true;
 }
 
-function setVibrate(set) {
+function setVibrateSetting(set) {
   if (set) localStorage.setItem("vibrate", "true");
   else localStorage.setItem("vibrate", "false");
 }
 
-function getVibrate() {
+function getVibrateSetting() {
   const vibrate = localStorage.getItem("vibrate");
 
   // default true

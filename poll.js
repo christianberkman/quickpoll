@@ -1,7 +1,7 @@
 let options = getOptions();
-const showCounterSetting = getshowCounter();
-const vibrateSetting = getVibrate();
-const beepSetting = getBeep();
+const showCounterSetting = sgtShowCounterSetting();
+const vibrateSetting = getVibrateSetting();
+const beepSetting = getBeepSetting();
 
 /**
  * Poll Buttons
@@ -53,7 +53,7 @@ buttonsContainer.addEventListener("click", function (e) {
 /**
  * Wake Lock
  */
-if (getWakeLock()) {
+if (getWakeLockSetting()) {
   let wakeLock = null;
 
   async function requestWakeLock() {
@@ -81,7 +81,7 @@ if (getWakeLock()) {
 
   document.addEventListener("visibilitychange", async () => {
     if (wakeLock !== null && document.visibilityState === "visible") {
-      if (getWakeLock()) {
+      if (getWakeLockSetting()) {
         await requestWakeLock();
       }
     }
