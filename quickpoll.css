@@ -4,7 +4,7 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   max-width: 720px;
   margin: auto;
 
@@ -25,4 +25,9 @@ body {
 .qp-button {
   flex: 1 1 0;
   min-height: 64px;
+}
+
+.qp-question-text{
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(16px);
 }
