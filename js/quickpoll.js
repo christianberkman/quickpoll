@@ -5,6 +5,21 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js");
 }
 
+const cacheVersionText = document.querySelector(".qp-cache-version-text");
+if (cacheVersionText) {
+  async function renderCacheVersionText()
+  {
+    const sw = await navigator.serviceWorker.ready;
+    sw.active.postMessage({ type: "GET_VERSION" });
+  
+    navigator.serviceWorker.addEventListener("message", (e) => {
+      cacheVersionText.textContent = e.data.version;
+    });
+  }
+
+  renderCacheVersionText();
+}
+
 /**
  * Declarations
  */

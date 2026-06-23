@@ -1,4 +1,4 @@
-const CACHE = "app-v260623";
+const CACHE = "v260623";
 
 const PRECACHE = [
   // Your files
@@ -19,12 +19,18 @@ const PRECACHE = [
   "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/fonts/bootstrap-icons.woff2",
 ];
 
+/**
+ * Install, pre-cache
+ */
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)));
   self.skipWaiting();
   console.log("Service Worker Installed");
 });
 
+/**
+ * Delete old caches
+ */
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches
@@ -39,8 +45,20 @@ self.addEventListener("activate", (e) => {
   console.log("Cache pre-loaded");
 });
 
+/**
+ *  Serve from cache first
+ */
 self.addEventListener("fetch", (e) => {
   e.respondWith(
     caches.match(e.request).then((cached) => cached || fetch(e.request)),
   );
+});
+
+/**
+ * Send CACHE version
+ */
+self.addEventListener("message", (e) => {
+  if (e.data.type === "GET_VERSION") {
+    e.source.postMessage({ version: CACHE });
+  }
 });
