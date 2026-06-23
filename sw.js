@@ -1,4 +1,4 @@
-const CACHE = "app-v1";
+const CACHE = "app-v260623";
 
 const PRECACHE = [
   // Your files
