@@ -2,7 +2,7 @@
  * Service Worker
  */
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/quickpoll/sw.js");
+  navigator.serviceWorker.register("/quickpoll/sw.js", { scope: "/quickpoll/"});
 }
 
 const cacheVersionText = document.querySelector(".qp-cache-version-text");
