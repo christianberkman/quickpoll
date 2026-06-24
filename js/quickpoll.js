@@ -1,7 +1,8 @@
 /**
  * Service Worker
  */
-if ("serviceWorker" in navigator && window.location.hostname !== "localhost") {
+if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
+  console.log('Registering Service Worker');
   navigator.serviceWorker.register("/quickpoll/sw.js", { scope: "/quickpoll/"});
 }
 
