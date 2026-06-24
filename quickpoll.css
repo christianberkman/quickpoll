@@ -7,10 +7,10 @@ body {
   min-height: 100%;
   max-width: 720px;
   margin: auto;
-
 }
 
 body {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
