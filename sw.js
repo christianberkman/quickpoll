@@ -1,4 +1,4 @@
-const CACHE = "v260623A";
+const CACHE = "v260624";
 
 const PRECACHE = [
   // Your files
