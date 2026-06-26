@@ -126,3 +126,20 @@ function beep() {
   oscillator.start();
   oscillator.stop(ctx.currentTime + 0.2);
 }
+
+/**
+ * Full Screen
+ */
+const mainContainer = document.getElementById("mainContainer");
+
+document
+  .getElementById("fullScreenLink")
+  .addEventListener("click", async function () {
+    try {
+      await mainContainer.requestFullscreen();
+    } catch (err) {
+      console.error(
+        `Error attempting to toggle full-screen mode: ${err.message}`,
+      );
+    }
+  });
