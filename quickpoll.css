@@ -7,10 +7,10 @@ body {
   min-height: 100%;
   max-width: 720px;
   margin: auto;
-
 }
 
 body {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -29,5 +29,6 @@ body {
 
 .qp-question-text{
     backdrop-filter: blur(64px);
+    backdrop-filter: blu
     -webkit-backdrop-filter: blur(16px);
 }

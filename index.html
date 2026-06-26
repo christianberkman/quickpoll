@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap 5 Minimal</title>
+   <title>QuickPoll</title>
     <link
       href="/quickpoll/bootswatch-vapor.min.css"
       rel="stylesheet"
@@ -17,11 +17,11 @@
 
   <body>
     <header class="container mt-3">
-      <h1 class="display-1">
-        <i class="bi bi-clipboard-data-fill"></i> Quick Poll
+      <h1 class="display-6 mb-3">
+        <i class="bi bi-clipboard-data-fill"></i> QuickPoll
       </h1>
 
-      <nav>
+       <nav class="ms-2 me-2">
         <button
           class="btn btn-outline-light w-100 mb-3 d-flex justify-content-between align-items-center"
           type="button"
@@ -34,10 +34,10 @@
 
         <div class="collapse list-group" id="collapseNav">
           <a href="#" class="list-group-item list-group-item-action active">
-            <i class="bi bi-list"></i> Question and Options
+            <i class="bi bi-question-square-fill"></i> Question and Options
           </a>
           <a href="/quickpoll/poll.html" class="list-group-item list-group-item-action">
-            <i class="bi bi-gear-fill"></i> Poll
+            <i class="bi bi-list"></i> Poll
           </a>
           <a href="/quickpoll/results.html" class="list-group-item list-group-item-action">
             <i class="bi bi-clipboard-data-fill"></i> Results
@@ -83,7 +83,7 @@
             maxlength="64"
             required
           />
-          <button class="btn qp-button-class" data-button-class="">
+          <button class="btn btn-sm qp-button-class" data-button-class="" tabindex="-1">
             <i class="bi bi-droplet-fill"></i>
           </button>
           <button
