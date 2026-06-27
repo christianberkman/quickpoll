@@ -86,6 +86,7 @@ if (optionsContainer) {
     }
 
     updateOptionsFromInputs();
+    toggleStartPollButton();
   });
 
   // Button Class
@@ -101,6 +102,7 @@ if (optionsContainer) {
     toggleButton.dataset.buttonClass = newClass;
 
     updateOptionsFromInputs();
+    toggleStartPollButton();
   });
 
   // Delete input
@@ -116,5 +118,14 @@ if (optionsContainer) {
     if (toDelete === last) appendOptionInput();
 
     updateOptionsFromInputs();
+    toggleStartPollButton();
   });
 }
+
+// Toggle Start Poll Button
+const startPollButton = document.getElementById("startPollButton");
+function toggleStartPollButton() {
+  if (getOptions().length >= 1) startPollButton.classList.remove("disabled");
+  else startPollButton.classList.add("disabled");
+}
+toggleStartPollButton();

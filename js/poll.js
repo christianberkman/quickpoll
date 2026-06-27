@@ -2,6 +2,7 @@ let options = getOptions();
 const showCounterSetting = sgtShowCounterSetting();
 const vibrateSetting = getVibrateSetting();
 const beepSetting = getBeepSetting();
+const totalCountText = document.querySelector(".qp-total-count");
 
 /**
  * Poll Buttons
@@ -16,8 +17,9 @@ options.forEach((option, index) => {
   clone.querySelector(".qp-label").textContent = option.label;
   clone.querySelector(".qp-count").textContent = option.count;
 
-  if (!showCounterSetting)
+  if (!showCounterSetting) {
     clone.querySelector(".qp-count").classList.add("d-none");
+  }
 
   clone.querySelector(".qp-button").classList.add(option.buttonClass);
   clone.querySelector(".qp-button").dataset.index = index;
@@ -43,12 +45,26 @@ buttonsContainer.addEventListener("click", function (e) {
   count++;
   button.dataset.qpCount = count;
   button.dataset.count = count;
-  if (showCounterSetting) button.querySelector(".qp-count").textContent = count;
 
+  
   options[index].count = count;
-
+  
   localStorage.setItem("options", JSON.stringify(options));
+ 
+  if (showCounterSetting) {
+    button.querySelector(".qp-count").textContent = count;
+    totalCountText.textContent = getTotalCount();
+  }
 });
+
+/**
+ * Total Count
+ */
+if (showCounterSetting) {
+  totalCountText.textContent = getTotalCount();
+} else {
+  document.getElementById("totalCountContainer").remove();
+}
 
 /**
  * Wake Lock
@@ -82,7 +98,8 @@ if (getWakeLockSetting()) {
   document.addEventListener("visibilitychange", async () => {
     if (wakeLock !== null && document.visibilityState === "visible") {
       if (getWakeLockSetting()) {
-        await requestWakeLock();
+        await requestWa;
+        keLock();
       }
     }
   });
@@ -130,16 +147,32 @@ function beep() {
 /**
  * Full Screen
  */
-const mainContainer = document.getElementById("mainContainer");
-
+const fullScreenContainer = document.getElementById("fullScreenContainer");
+const fullScreenHideEelements = document.querySelectorAll(
+  ".qp-fullscreen-hide",
+);
 document
   .getElementById("fullScreenLink")
   .addEventListener("click", async function () {
+    // Request Full Screen
     try {
-      await mainContainer.requestFullscreen();
+      await fullScreenContainer.requestFullscreen();
+
+      fullScreenHideEelements.forEach((element) => {
+        element.classList.add("d-none");
+      });
     } catch (err) {
       console.error(
         `Error attempting to toggle full-screen mode: ${err.message}`,
       );
     }
+
+    // Close Full Screen
+    document.addEventListener("fullscreenchange", function () {
+      if (!document.fullscreenElement) {
+        fullScreenHideEelements.forEach((element) => {
+          element.classList.remove("d-none");
+        });
+      }
+    });
   });

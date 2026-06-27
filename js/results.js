@@ -3,7 +3,7 @@
  */
 const resultsContainer = document.getElementById("resultsContainer");
 const options = getOptions();
-const total = getTotal();
+const total = getTotalCount();
 const resultTemplate = document.getElementById("resultTemplate");
 
 // Render results
