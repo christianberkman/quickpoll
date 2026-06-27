@@ -157,7 +157,7 @@ document
   .addEventListener("click", async function () {
     // Request Full Screen
     try {
-      await fullscreenContainer.requestfullscreen();
+      await fullscreenContainer.requestFullscreen();
 
       fullscreenHideEelements.forEach((element) => {
         element.classList.add("d-none");
