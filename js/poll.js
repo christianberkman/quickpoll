@@ -46,11 +46,9 @@ buttonsContainer.addEventListener("click", function (e) {
   button.dataset.qpCount = count;
   button.dataset.count = count;
 
-  
   options[index].count = count;
-  
+
   localStorage.setItem("options", JSON.stringify(options));
- 
   if (showCounterSetting) {
     button.querySelector(".qp-count").textContent = count;
     totalCountText.textContent = getTotalCount();
@@ -129,19 +127,22 @@ function beep() {
   const ctx = getAudioContext();
   const oscillator = ctx.createOscillator();
   const gainNode = ctx.createGain();
-
   oscillator.connect(gainNode);
   gainNode.connect(ctx.destination);
-
   oscillator.type = "square";
-  oscillator.frequency.value = beepFreqs[beepIndex];
-  beepIndex = (beepIndex + 1) % beepFreqs.length;
 
-  gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+  const t = ctx.currentTime;
+  const first = 0.08;
+  const second = 0.14;
 
-  oscillator.start();
-  oscillator.stop(ctx.currentTime + 0.2);
+  oscillator.frequency.setValueAtTime(2000, t);
+  oscillator.frequency.setValueAtTime(3000, t + first);
+
+  gainNode.gain.setValueAtTime(0.3, t);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, t + first + second);
+
+  oscillator.start(t);
+  oscillator.stop(t + first + second);
 }
 
 /**
