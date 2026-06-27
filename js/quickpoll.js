@@ -6,20 +6,10 @@ if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
   navigator.serviceWorker.register("/quickpoll/sw.js", { scope: "/quickpoll/"});
 }
 
-const cacheVersionText = document.querySelector(".qp-cache-version-text");
-if (cacheVersionText) {
-  async function renderCacheVersionText()
-  {
-    const sw = await navigator.serviceWorker.ready;
-    sw.active.postMessage({ type: "GET_VERSION" });
-  
-    navigator.serviceWorker.addEventListener("message", (e) => {
-      cacheVersionText.textContent = e.data.version;
-    });
-  }
-
-  renderCacheVersionText();
-}
+// Auto Update
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+  location.reload();
+});
 
 /**
  * Declarations
