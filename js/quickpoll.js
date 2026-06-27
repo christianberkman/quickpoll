@@ -125,7 +125,7 @@ function getVibrateSetting() {
   return false;
 }
 
-function getTotal() {
+function getTotalCount() {
   let total = 0;
   getOptions().forEach((option) => {
     total += Number(option.count);
@@ -150,7 +150,7 @@ if (questionText) {
 
 const totalCount = document.querySelector(".qp-total-count");
 if (totalCount) {
-  totalCount.textContent = "Total count: " + getTotal();
+  totalCount.textContent = "Total count: " + getTotalCount();
 }
 
 function nextButtonClass(className) {

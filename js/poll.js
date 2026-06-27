@@ -2,6 +2,7 @@ let options = getOptions();
 const showCounterSetting = sgtShowCounterSetting();
 const vibrateSetting = getVibrateSetting();
 const beepSetting = getBeepSetting();
+const totalCountText = document.querySelector(".qp-total-count");
 
 /**
  * Poll Buttons
@@ -16,8 +17,9 @@ options.forEach((option, index) => {
   clone.querySelector(".qp-label").textContent = option.label;
   clone.querySelector(".qp-count").textContent = option.count;
 
-  if (!showCounterSetting)
+  if (!showCounterSetting) {
     clone.querySelector(".qp-count").classList.add("d-none");
+  }
 
   clone.querySelector(".qp-button").classList.add(option.buttonClass);
   clone.querySelector(".qp-button").dataset.index = index;
@@ -43,12 +45,24 @@ buttonsContainer.addEventListener("click", function (e) {
   count++;
   button.dataset.qpCount = count;
   button.dataset.count = count;
-  if (showCounterSetting) button.querySelector(".qp-count").textContent = count;
 
   options[index].count = count;
 
   localStorage.setItem("options", JSON.stringify(options));
+  if (showCounterSetting) {
+    button.querySelector(".qp-count").textContent = count;
+    totalCountText.textContent = getTotalCount();
+  }
 });
+
+/**
+ * Total Count
+ */
+if (showCounterSetting) {
+  totalCountText.textContent = getTotalCount();
+} else {
+  document.getElementById("totalCountContainer").remove();
+}
 
 /**
  * Wake Lock
@@ -82,7 +96,8 @@ if (getWakeLockSetting()) {
   document.addEventListener("visibilitychange", async () => {
     if (wakeLock !== null && document.visibilityState === "visible") {
       if (getWakeLockSetting()) {
-        await requestWakeLock();
+        await requestWa;
+        keLock();
       }
     }
   });
@@ -112,34 +127,53 @@ function beep() {
   const ctx = getAudioContext();
   const oscillator = ctx.createOscillator();
   const gainNode = ctx.createGain();
-
   oscillator.connect(gainNode);
   gainNode.connect(ctx.destination);
-
   oscillator.type = "square";
-  oscillator.frequency.value = beepFreqs[beepIndex];
-  beepIndex = (beepIndex + 1) % beepFreqs.length;
 
-  gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+  const t = ctx.currentTime;
+  const first = 0.08;
+  const second = 0.14;
 
-  oscillator.start();
-  oscillator.stop(ctx.currentTime + 0.2);
+  oscillator.frequency.setValueAtTime(2000, t);
+  oscillator.frequency.setValueAtTime(3000, t + first);
+
+  gainNode.gain.setValueAtTime(0.3, t);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, t + first + second);
+
+  oscillator.start(t);
+  oscillator.stop(t + first + second);
 }
 
 /**
  * Full Screen
  */
-const mainContainer = document.getElementById("mainContainer");
-
+const fullScreenContainer = document.getElementById("fullScreenContainer");
+const fullScreenHideEelements = document.querySelectorAll(
+  ".qp-fullscreen-hide",
+);
 document
   .getElementById("fullScreenLink")
   .addEventListener("click", async function () {
+    // Request Full Screen
     try {
-      await mainContainer.requestFullscreen();
+      await fullScreenContainer.requestFullscreen();
+
+      fullScreenHideEelements.forEach((element) => {
+        element.classList.add("d-none");
+      });
     } catch (err) {
       console.error(
         `Error attempting to toggle full-screen mode: ${err.message}`,
       );
     }
+
+    // Close Full Screen
+    document.addEventListener("fullscreenchange", function () {
+      if (!document.fullscreenElement) {
+        fullScreenHideEelements.forEach((element) => {
+          element.classList.remove("d-none");
+        });
+      }
+    });
   });
