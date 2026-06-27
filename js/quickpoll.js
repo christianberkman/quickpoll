@@ -133,6 +133,24 @@ function emptyStorage() {
 /**
  * Rendering
  */
+
+// Navbar
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        // Scrolling down — hide
+        document.querySelector('.navbar').classList.add('hidden');
+    } else {
+        // Scrolling up — show
+        document.querySelector('.navbar').classList.remove('hidden');
+    }
+
+    lastScrollY = currentScrollY;
+});
+
 const questionText = document.querySelector(".qp-question-text");
 if (questionText) {
   questionText.textContent = getQuestion();

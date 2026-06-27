@@ -1,4 +1,4 @@
-const CACHE = "v260627A";
+const CACHE = "v260627B";
 console.log("SW Cache version: " + CACHE);
 
 const PRECACHE = [

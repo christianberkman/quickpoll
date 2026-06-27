@@ -13,48 +13,61 @@
   </head>
 
   <body>
-    <header class="container mt-3">
-      <h1 class="display-6 mb-3">
-        <i class="bi bi-clipboard-data-fill"></i> QuickPoll
-      </h1>
-
-      <nav class="ms-2 me-2">
+    <!-- navigation -->
+    <nav class="navbar sticky-top py-3 px-2">
+      <div class="container-fluid d-flex">
+        <h1 class="display-6 fs-3 fw-bold m-0">
+          <i class="bi bi-clipboard-data-fill"></i> Quickpoll
+        </h1>
         <button
-          class="btn btn-outline-light w-100 mb-3 d-flex justify-content-between align-items-center"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseNav"
+          class="btn"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#navMenu"
         >
-          <span><i class="bi bi-gear-fill"></i> Settings</span>
-          <i class="bi bi-chevron-expand"></i>
+          <i class="bi bi-list text-white fs-3"></i>
         </button>
+      </div>
+    </nav>
 
-        <div class="collapse list-group" id="collapseNav">
-          <a
-            href="/quickpoll/index.html"
-            class="list-group-item list-group-item-action"
-          >
-            <i class="bi bi-question-square-fill"></i> Question and Options
-          </a>
-          <a
-            href="/quickpoll/poll.html"
-            class="list-group-item list-group-item-action"
-          >
-            <i class="bi bi-list"></i> Poll
-          </a>
-          <a
-            href="/quickpoll/results.html"
-            class="list-group-item list-group-item-action"
-          >
-            <i class="bi bi-clipboard-data-fill"></i> Results
-          </a>
-          <a href="#" class="list-group-item list-group-item-action active">
-            <i class="bi bi-gear-fill"></i> Settings
-          </a>
-        </div>
-      </nav>
-    </header>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="navMenu">
+      <div class="offcanvas-header">
+        <h1 class="display-6 fs-3 fw-bold m-0">
+          <i class="bi bi-clipboard-data-fill"></i> Quickpoll
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/quickpoll/index.html">
+              <i class="bi bi-question-square-fill"></i> Question and Options
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quickpoll/poll.html">
+              <i class="bi bi-list"></i> Poll
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quickpoll/results.html">
+              <i class="bi bi-clipboard-data-fill"></i> Results
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-secondary" href="#">
+              <i class="bi bi-gear-fill"></i> Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
+    <!-- main-->
     <main class="container mt-3">
       <div class="row mb-4 px-1">
         <h2>Settings</h2>
@@ -118,7 +131,7 @@
           >
             <i class="bi bi-trash"></i> Reset everything
           </button>
-      </div>
+        </div>
       </div>
     </main>
 
