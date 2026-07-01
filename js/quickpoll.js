@@ -43,17 +43,21 @@ function updateOptionsFromInputs() {
     if (option.label.trim() !== "") options.push(option);
   });
 
-  localStorage.setItem("options", JSON.stringify(options));
+  setOptions(options);
 }
 
 function getOptions() {
   try {
     const storage = localStorage.getItem("options");
-    console.log("Storage: " + storage);
     return JSON.parse(storage) || [];
   } catch (e) {
     return [];
   }
+}
+
+function setOptions(options)
+{
+  localStorage.setItem("options", JSON.stringify(options));
 }
 
 function getQuestion() {

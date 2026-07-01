@@ -44,7 +44,7 @@
       <div class="offcanvas-body">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active text-secondary" href="#">
+            <a class="nav-link" href="/quickpoll/index.html">
               <i class="bi bi-question-square-fill"></i> Question and Options
             </a>
           </li>
@@ -54,7 +54,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/quickpoll/adjust.html">
+            <a class="nav-link active text-secondary" href="#">
               <i class="bi bi-plus-slash-minus"></i> Adjust
             </a>
           </li>
@@ -73,65 +73,43 @@
     </div>
 
     <!-- main-->
-    <main class="container mt-3 mb-3">
-      <div class="row mb-3 px-1">
-        <h2>Question</h2>
-        <div>
-          <input
-            class="form-control form-control-lg"
-            id="questionInput"
-            placeholder="Your question..."
-          />
-        </div>
-      </div>
+    <main class="container mt-3">
+      <div class="row mb-4 px-1">
+        <h2 class="display-2 mb-0 qp-question-text">Question</h2>
+        <p class="text-secondary qp-total-count"></p>
 
-      <div class="row mb-2 px-1">
-        <h2>Options</h2>
-        <div id="optionsContainer"></div>
-      </div>
-
-      <div>
-        <a
-          href="/quickpoll/poll.html"
-          class="btn btn-lg btn-success text-black w-100 disabled"
-          id="startPollButton"
-        >
-          <i class="bi bi-list"></i> Start Poll
-        </a>
+        <div id="adjustContainer" class="list-group px-2 mb-3"></div>
       </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <template id="adjustTemplate">
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="fs-4 text-center qp-option-label"></p>
 
-    <template id="optionTemplate">
-      <div class="qp-option-input">
-        <input type="hidden" class="qp-option-count" value="0" />
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control form-control-lg qp-option-label"
-            placeholder="New option"
-            maxlength="64"
-            required
-          />
-          <button
-            class="btn btn-sm qp-button-class"
-            data-button-class=""
-            tabindex="-1"
-          >
-            <i class="bi bi-droplet-fill"></i>
-          </button>
-          <button
-            class="btn btn-outline-danger qp-delete-option"
-            type="button"
-            tabindex="-1"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
+          <div class="flex">
+            <div class="input-group w-50 m-auto">
+              <button class="btn btn-primary qp-button-decrease">
+                <i class="bi bi-dash"></i>
+              </button>
+              <input
+                type="number"
+                class="form-control form-control-lg qp-count"
+                data-qp-index=""
+                min="0"
+              />
+              <button class="btn btn-primary qp-button-increase">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/quickpoll/js/quickpoll.js"></script>
-    <script src="/quickpoll/js/index.js"></script>
+    <script src="/quickpoll/js/adjust.js"></script>
   </body>
 </html>
