@@ -1,15 +1,19 @@
 /**
  * Service Worker
  */
-if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
-  console.log('Registering Service Worker');
-  navigator.serviceWorker.register("/quickpoll/sw.js", { scope: "/quickpoll/"});
-}
-
 // Auto Update
-navigator.serviceWorker.addEventListener('controllerchange', () => {
+navigator.serviceWorker.addEventListener("controllerchange", () => {
+  console.log("ControllerChange Event");
   location.reload();
 });
+
+// Register
+if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
+  console.log("Registering Service Worker");
+  navigator.serviceWorker.register("/quickpoll/sw.js", {
+    scope: "/quickpoll/",
+  });
+}
 
 /**
  * Declarations
@@ -43,17 +47,20 @@ function updateOptionsFromInputs() {
     if (option.label.trim() !== "") options.push(option);
   });
 
-  localStorage.setItem("options", JSON.stringify(options));
+  setOptions(options);
 }
 
 function getOptions() {
   try {
     const storage = localStorage.getItem("options");
-    console.log("Storage: " + storage);
     return JSON.parse(storage) || [];
   } catch (e) {
     return [];
   }
+}
+
+function setOptions(options) {
+  localStorage.setItem("options", JSON.stringify(options));
 }
 
 function getQuestion() {
@@ -133,6 +140,24 @@ function emptyStorage() {
 /**
  * Rendering
  */
+
+// Navbar
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY && currentScrollY > 60) {
+    // Scrolling down — hide
+    document.querySelector(".navbar").classList.add("hidden");
+  } else {
+    // Scrolling up — show
+    document.querySelector(".navbar").classList.remove("hidden");
+  }
+
+  lastScrollY = currentScrollY;
+});
+
 const questionText = document.querySelector(".qp-question-text");
 if (questionText) {
   questionText.textContent = getQuestion();
@@ -140,7 +165,7 @@ if (questionText) {
 
 const totalCount = document.querySelector(".qp-total-count");
 if (totalCount) {
-  totalCount.textContent = "Total count: " + getTotalCount();
+  totalCount.textContent = getTotalCount();
 }
 
 function nextButtonClass(className) {

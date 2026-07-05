@@ -1,5 +1,4 @@
-const CACHE = "v260627A";
-console.log("SW Cache version: " + CACHE);
+const CACHE = "v260705";
 
 const PRECACHE = [
   // Your files
@@ -27,7 +26,7 @@ const PRECACHE = [
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)));
   self.skipWaiting();
-  console.log("Service Worker Installed");
+  console.log("Service Worker Installed: " + CACHE);
 });
 
 /**

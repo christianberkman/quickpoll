@@ -48,10 +48,9 @@ buttonsContainer.addEventListener("click", function (e) {
 
   options[index].count = count;
 
-  localStorage.setItem("options", JSON.stringify(options));
+  setOptions(options);
   if (showCounterSetting) {
     button.querySelector(".qp-count").textContent = count;
-    totalCountText.textContent = getTotalCount();
   }
 });
 
@@ -148,18 +147,18 @@ function beep() {
 /**
  * Full Screen
  */
-const fullScreenContainer = document.getElementById("fullScreenContainer");
-const fullScreenHideEelements = document.querySelectorAll(
+const fullscreenContainer = document.getElementById("fullscreenContainer");
+const fullscreenHideEelements = document.querySelectorAll(
   ".qp-fullscreen-hide",
 );
 document
-  .getElementById("fullScreenLink")
+  .getElementById("fullscreenButton")
   .addEventListener("click", async function () {
     // Request Full Screen
     try {
-      await fullScreenContainer.requestFullscreen();
+      await fullscreenContainer.requestFullscreen();
 
-      fullScreenHideEelements.forEach((element) => {
+      fullscreenHideEelements.forEach((element) => {
         element.classList.add("d-none");
       });
     } catch (err) {
@@ -171,7 +170,7 @@ document
     // Close Full Screen
     document.addEventListener("fullscreenchange", function () {
       if (!document.fullscreenElement) {
-        fullScreenHideEelements.forEach((element) => {
+        fullscreenHideEelements.forEach((element) => {
           element.classList.remove("d-none");
         });
       }
