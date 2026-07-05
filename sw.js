@@ -1,12 +1,14 @@
-const CACHE = "v260705";
+const CACHE = "v260705A";
 
 const PRECACHE = [
   // Your files
+  "/quickpoll/adjust.html",
   "/quickpoll/index.html",
   "/quickpoll/poll.html",
   "/quickpoll/quickpoll.css",
   "/quickpoll/results.html",
   "/quickpoll/settings.html",
+  "/quickpoll/adjust.js",
   "/quickpoll/js/index.js",
   "/quickpoll/js/poll.js",
   "/quickpoll/js/quickpoll.js",
