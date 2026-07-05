@@ -5,6 +5,7 @@ const options = getOptions();
  */
 const adjustContainer = document.getElementById("adjustContainer");
 const adjustTemplate = document.getElementById("adjustTemplate");
+const totalCountText = document.querySelector(".qp-total-count");
 
 function renderAdjusts() {
   options.forEach((option, index) => {
@@ -28,10 +29,11 @@ adjustContainer.addEventListener("click", function (e) {
 
   const countInput = button.closest(".input-group").querySelector(".qp-count");
   const index = Number(countInput.dataset.qpIndex);
-  if(countInput.value > 0) countInput.value--;
+  if (countInput.value > 0) countInput.value--;
 
   options[index].count = Number(countInput.value);
   setOptions(options);
+  totalCountText.textContent = getTotalCount();
 });
 
 /**
@@ -47,4 +49,5 @@ adjustContainer.addEventListener("click", function (e) {
 
   options[index].count = Number(countInput.value);
   setOptions(options);
+  totalCountText.textContent = getTotalCount();
 });

@@ -51,7 +51,6 @@ buttonsContainer.addEventListener("click", function (e) {
   setOptions(options);
   if (showCounterSetting) {
     button.querySelector(".qp-count").textContent = count;
-    totalCountText.textContent = getTotalCount();
   }
 });
 

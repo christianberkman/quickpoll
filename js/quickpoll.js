@@ -2,14 +2,16 @@
  * Service Worker
  */
 // Auto Update
-navigator.serviceWorker.addEventListener('controllerchange', () => {
+navigator.serviceWorker.addEventListener("controllerchange", () => {
   location.reload();
 });
 
 // Register
 if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
-  console.log('Registering Service Worker');
-  navigator.serviceWorker.register("/quickpoll/sw.js", { scope: "/quickpoll/"});
+  console.log("Registering Service Worker");
+  navigator.serviceWorker.register("/quickpoll/sw.js", {
+    scope: "/quickpoll/",
+  });
 }
 
 /**
@@ -56,8 +58,7 @@ function getOptions() {
   }
 }
 
-function setOptions(options)
-{
+function setOptions(options) {
   localStorage.setItem("options", JSON.stringify(options));
 }
 
@@ -142,18 +143,18 @@ function emptyStorage() {
 // Navbar
 let lastScrollY = window.scrollY;
 
-window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
 
-    if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        // Scrolling down — hide
-        document.querySelector('.navbar').classList.add('hidden');
-    } else {
-        // Scrolling up — show
-        document.querySelector('.navbar').classList.remove('hidden');
-    }
+  if (currentScrollY > lastScrollY && currentScrollY > 60) {
+    // Scrolling down — hide
+    document.querySelector(".navbar").classList.add("hidden");
+  } else {
+    // Scrolling up — show
+    document.querySelector(".navbar").classList.remove("hidden");
+  }
 
-    lastScrollY = currentScrollY;
+  lastScrollY = currentScrollY;
 });
 
 const questionText = document.querySelector(".qp-question-text");
@@ -163,7 +164,7 @@ if (questionText) {
 
 const totalCount = document.querySelector(".qp-total-count");
 if (totalCount) {
-  totalCount.textContent = "Total count: " + getTotalCount();
+  totalCount.textContent = getTotalCount();
 }
 
 function nextButtonClass(className) {
