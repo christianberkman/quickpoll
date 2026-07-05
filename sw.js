@@ -1,4 +1,4 @@
-const CACHE = "v260705A";
+const CACHE = "v260705B";
 
 const PRECACHE = [
   // Your files
@@ -16,6 +16,8 @@ const PRECACHE = [
   "/quickpoll/js/settings.js",
 
   "/quickpoll/bootswatch-vapor.min.css",
+ 
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js",
   "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css",
   "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/fonts/bootstrap-icons.woff2",
   "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap",
