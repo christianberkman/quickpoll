@@ -1,14 +1,15 @@
 /**
  * Service Worker
  */
-// Auto Update
-navigator.serviceWorker.addEventListener("controllerchange", () => {
-  console.log("ControllerChange Event");
-  location.reload();
-});
-
-// Register
+console.log(window.location.hostname);
 if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
+  // Auto Update
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    console.log("ControllerChange Event");
+    location.reload();
+  });
+
+  // Register
   console.log("Registering Service Worker");
   navigator.serviceWorker.register("/quickpoll/sw.js", {
     scope: "/quickpoll/",
