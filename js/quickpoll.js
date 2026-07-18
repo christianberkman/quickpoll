@@ -1,7 +1,6 @@
 /**
  * Service Worker
  */
-console.log(window.location.hostname);
 if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
   // Auto Update
   navigator.serviceWorker.addEventListener("controllerchange", () => {
