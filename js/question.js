@@ -122,10 +122,19 @@ if (optionsContainer) {
   });
 }
 
-// Toggle Start Poll Button
+// Toggle Start Poll Button and Warning Text
 const startPollButton = document.getElementById("startPollButton");
+const startButtonWarningText = document.getElementById(
+  "startButtonWarningText",
+);
+
 function toggleStartPollButton() {
-  if (getOptions().length >= 1) startPollButton.classList.remove("disabled");
-  else startPollButton.classList.add("disabled");
+  if (getOptions().length >= 1) {
+    startPollButton.classList.remove("disabled");
+    startButtonWarningText.classList.add("d-none");
+  } else {
+    startPollButton.classList.add("disabled");
+    startButtonWarningText.classList.remove("d-none");
+  }
 }
 toggleStartPollButton();
