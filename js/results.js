@@ -1,3 +1,5 @@
+redirectToQuestionsIfNoOptions()
+
 /**
  * Render Results
  */

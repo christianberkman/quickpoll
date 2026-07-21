@@ -173,3 +173,10 @@ function nextButtonClass(className) {
   const nextIndex = (currentIndex + 1) % buttonClasses.length;
   return buttonClasses[nextIndex];
 }
+
+/**
+ * Other
+ */
+function redirectToQuestionsIfNoOptions() {
+  if (getOptions().length == 0) location.href = "/quickpoll/question.html";
+}
