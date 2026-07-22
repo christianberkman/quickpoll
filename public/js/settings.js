@@ -54,5 +54,5 @@ resetButton.addEventListener("click", function (e) {
   if (!areYouSure) return;
 
   emptyStorage();
-  window.location.href = "/quickpoll/question.html";
+  window.location.href = "/question.html";
 });

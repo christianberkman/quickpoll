@@ -10,8 +10,8 @@ if ("serviceWorker" in navigator && window.location.hostname !== "127.0.0.1") {
 
   // Register
   console.log("Registering Service Worker");
-  navigator.serviceWorker.register("/quickpoll/sw.js", {
-    scope: "/quickpoll/",
+  navigator.serviceWorker.register("/sw.js", {
+    scope: "/",
   });
 }
 
@@ -178,5 +178,5 @@ function nextButtonClass(className) {
  * Other
  */
 function redirectToQuestionsIfNoOptions() {
-  if (getOptions().length == 0) location.href = "/quickpoll/question.html";
+  if (getOptions().length == 0) location.href = "/question.html";
 }
