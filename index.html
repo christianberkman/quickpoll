@@ -17,7 +17,8 @@
     <nav class="navbar sticky-top py-3 px-2">
       <div class="container-fluid d-flex">
         <h1 class="display-6 fs-3 fw-bold m-0">
-          <i class="bi bi-clipboard-data-fill"></i> Quickpoll
+          <i class="bi bi-clipboard-data-fill"></i>
+          Quickpoll
         </h1>
         <button
           class="btn"
@@ -32,7 +33,8 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="navMenu">
       <div class="offcanvas-header">
         <h1 class="display-6 fs-3 fw-bold m-0">
-          <i class="bi bi-clipboard-data-fill"></i> Quickpoll
+          <i class="bi bi-clipboard-data-fill"></i>
+          Quickpoll
         </h1>
         <button
           type="button"
@@ -45,27 +47,32 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link active text-secondary" href="#">
-              <i class="bi bi-question-square-fill"></i> Question and Options
+              <i class="bi bi-question-square-fill"></i>
+              Question and Options
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/quickpoll/poll.html">
-              <i class="bi bi-list"></i> Poll
+              <i class="bi bi-list"></i>
+              Poll
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/quickpoll/adjust.html">
-              <i class="bi bi-plus-slash-minus"></i> Adjust
+              <i class="bi bi-plus-slash-minus"></i>
+              Adjust
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/quickpoll/results.html">
-              <i class="bi bi-clipboard-data-fill"></i> Results
+              <i class="bi bi-clipboard-data-fill"></i>
+              Results
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/quickpoll/settings.html">
-              <i class="bi bi-gear-fill"></i> Settings
+              <i class="bi bi-gear-fill"></i>
+              Settings
             </a>
           </li>
         </ul>
@@ -79,7 +86,8 @@
           A quick, in-person poll on one device. Set up in seconds.
         </h1>
         <p class="lead text-center">
-          Works offline, nothing leaves the room.<br />
+          Works offline, nothing leaves the room.
+          <br />
         </p>
       </div>
       <!--/row hero-->
@@ -99,43 +107,121 @@
             class="btn btn-lg btn-success text-black w-100 disabled"
             id="startPollButton"
           >
-            Get started <i class="bi bi-arrow-right-circle"></i>
+            Get started
+            <i class="bi bi-arrow-right-circle"></i>
           </a>
         </div>
       </div>
       <!--/row cta-->
 
-      <div class="row px-1">
+      <div class="row px-1 mb-3">
         <p class="text-center">
-          <span class="me-2 text-nowrap"
-            ><i class="bi bi-x"></i> No signup</span
-          >
-          <span class="me-2 text-nowrap"><i class="bi bi-x"></i> No login</span>
-          <span class="me-2 text-nowrap"><i class="bi bi-x"></i> No cloud</span>
-          <span class="me-2 text-nowrap"><i class="bi bi-x"></i> No ads</span
-          ><br />
-          <span class="text-nowrap"
-            ><i class="bi bi-check"></i> Completely offline
+          <span class="me-2 text-nowrap">
+            <i class="bi bi-x"></i>
+            No signup
           </span>
-          <span class="text-nowrap"
-            ><i class="bi bi-check"></i> Open Source
+          <span class="me-2 text-nowrap">
+            <i class="bi bi-x"></i>
+            No login
+          </span>
+          <span class="me-2 text-nowrap">
+            <i class="bi bi-x"></i>
+            No cloud
+          </span>
+          <span class="me-2 text-nowrap">
+            <i class="bi bi-x"></i>
+            No ads
+          </span>
+          <br />
+          <span class="text-nowrap">
+            <i class="bi bi-check"></i>
+            Completely offline
+          </span>
+          <span class="text-nowrap">
+            <i class="bi bi-check"></i>
+            Open Source
           </span>
         </p>
       </div>
       <!--/row trust-->
+
+      <div class="row px-1 mb-3">
+        <h3 class="mb-3">Quickpoll in action</h3>
+
+        <div
+          class="d-flex overflow-x-auto mx-3 flex-nowrap gap-2 pb-2"
+          style="scrollbar-width: none"
+        >
+          <div class="flex-shrink-0" style="width: 75%; max-width: 200px">
+            <img
+              src="/quickpoll/images/options.png"
+              class="rounded-3 w-100 border border-2"
+              alt="Set your options"
+            />
+            <span class="d-block text-center small mt-1">Set your options</span>
+          </div>
+          <div class="flex-shrink-0" style="width: 75%; max-width: 200px">
+            <img
+              src="/quickpoll/images/poll.png"
+              class="rounded-3 w-100 border border-2"
+              alt="Take the poll"
+            />
+            <span class="d-block text-center small mt-1">Take the poll</span>
+          </div>
+          <div class="flex-shrink-0" style="width: 75%; max-width: 200px">
+            <img
+              src="/quickpoll/images/results.png"
+              class="rounded-3 w-100 border border-2"
+              alt="See results instantly"
+            />
+            <span class="d-block text-center small mt-1">
+              See results instantly
+            </span>
+          </div>
+
+          <div class="flex-shrink-0" style="width: 75%; max-width: 200px">
+            <img
+              src="/quickpoll/images/adjust.png"
+              class="rounded-3 w-100 border border-2"
+              alt="Tally Items"
+            />
+            <span class="d-block text-center small mt-1">Tally Items</span>
+          </div>
+
+          <div class="flex-shrink-0" style="width: 75%; max-width: 200px">
+            <img
+              src="/quickpoll/images/quiz.png"
+              class="rounded-3 w-100 border border-2"
+              alt="Track Team Scores"
+            />
+            <span class="d-block text-center small mt-1">
+              Track team scores
+            </span>
+          </div>
+        </div>
+      </div>
+      <!--/row screenshots-->
+
+      <div class="row px-1 mb-3"></div>
+      <!--/row install button-->
     </main>
 
     <footer class="container mb-3">
       <hr />
-      <p class="text-center">
+      <p class="text-center text-muted">
         <span class="text-nowrap">
           <a
             href="https://github.com/christianberkman/quickpoll/"
-            class="text-reset muted text-decoration-none"
+            class="text-reset"
           >
-            <i class="bi bi-github"></i> Github
+            <i class="bi bi-github"></i>
+            Github
           </a>
         </span>
+
+        <i class="bi bi-dot"></i>
+
+        <span class="text-nowrap">Made in Uganda</span>
       </p>
     </footer>
 
