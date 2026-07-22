@@ -1,3 +1,5 @@
+redirectToQuestionsIfNoOptions()
+
 let options = getOptions();
 const showCounterSetting = sgtShowCounterSetting();
 const vibrateSetting = getVibrateSetting();

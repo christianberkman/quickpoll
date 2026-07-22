@@ -5,13 +5,14 @@ const PRECACHE = [
   "/quickpoll/adjust.html",
   "/quickpoll/index.html",
   "/quickpoll/poll.html",
+  "/quickpoll/question.html",
   "/quickpoll/results.html",
   "/quickpoll/settings.html",
 
   "/quickpoll/js/adjust.js",
-  "/quickpoll/js/index.js",
   "/quickpoll/js/poll.js",
   "/quickpoll/js/quickpoll.js",
+  "/quickpoll/js/question.js",
   "/quickpoll/js/results.js",
   "/quickpoll/js/settings.js",
 
