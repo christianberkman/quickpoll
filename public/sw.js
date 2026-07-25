@@ -1,7 +1,8 @@
-const CACHE = "v260725";
+const CACHE = "v260725A";
 
 const PRECACHE = [
   // Your files
+  "/",
   "/adjust.html",
   "/index.html",
   "/poll.html",
