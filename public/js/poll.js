@@ -1,4 +1,4 @@
-redirectToQuestionsIfNoOptions()
+redirectToQuestionsIfNoOptions();
 
 let options = getOptions();
 const showCounterSetting = sgtShowCounterSetting();
@@ -31,7 +31,15 @@ options.forEach((option, index) => {
 });
 
 // Button click
+let lastButtonClick = 0;
+const cooldown = 300; // ms
+
 buttonsContainer.addEventListener("click", function (e) {
+  // Throttle
+  const now = Date.now();
+  if (now - lastButtonClick < cooldown) return;
+  lastButtonClick = now;
+
   const button = e.target.closest(".qp-button");
   if (!button) return false;
 
